@@ -13,6 +13,7 @@
 #include "lightsky/setup/arch.h"
 #include "lightsky/setup/os.h"
 #include "lightsky/setup/macros.h"
+#include "lightsky/setup/api.h"
 
 namespace ls {
 namespace platform {
