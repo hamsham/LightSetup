@@ -13,7 +13,9 @@
 /*
  * Ensure C++11 Support
  */
-#if (__cplusplus < 201103L) || (!defined(__GXX_EXPERIMENTAL_CXX0X__))
+#if !defined (__GXX_EXPERIMENTAL_CXX0X__) \
+&& !(defined (_MSC_VER) && (_MSC_VER >= 1900)) \
+&& !(__cplusplus >= 201103L)
     #error "A C++11-compliant compiler is required to build LightSky."
 #endif
 

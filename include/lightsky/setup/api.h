@@ -14,7 +14,7 @@
 /*
  * Dynamic Library Setup
  */
-#if defined(LS_OS_WINDOWS) && defined(LS_SHARED)
+#if defined(LS_OS_WINDOWS) && defined(LS_SHARED) && defined (LS_COMPILER_MSC)
     #ifdef LS_BUILD_SHARED
         #define LS_API __declspec( dllexport )
     #else
