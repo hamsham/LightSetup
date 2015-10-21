@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   setup/api.h
  * Author: Miles Lacey
  *
@@ -20,6 +20,12 @@
     #else
         #define LS_API __declspec( dllimport )
     #endif
+#elif defined(LS_SHARED) && defined (LS_COMPILER_GNU)
+    #ifdef LS_BUILD_SHARED
+        #define LS_API __attribute__((__visibility__("default")))
+    #else
+        #define LS_API
+    #endif
 #else
     #define LS_API
 #endif
@@ -34,4 +40,3 @@
 #endif
 
 #endif	/* __LS_SETUP_API_H__ */
-
