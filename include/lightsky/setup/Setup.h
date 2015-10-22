@@ -9,11 +9,11 @@
 #ifndef __LS_SETUP_SETUP_H__
 #define __LS_SETUP_SETUP_H__
 
-#include "lightsky/setup/compiler.h"
-#include "lightsky/setup/arch.h"
-#include "lightsky/setup/os.h"
-#include "lightsky/setup/macros.h"
-#include "lightsky/setup/api.h"
+#include "lightsky/setup/Compiler.h"
+#include "lightsky/setup/Arch.h"
+#include "lightsky/setup/OS.h"
+#include "lightsky/setup/Macros.h"
+#include "lightsky/setup/Api.h"
 
 namespace ls {
 namespace platform {

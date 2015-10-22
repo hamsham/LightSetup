@@ -6,7 +6,7 @@
  * current platform, OS, compiler, and build target.
  */
 
-#include "lightsky/setup/setup.h"
+#include "lightsky/setup/Setup.h"
 
 namespace ls {
 

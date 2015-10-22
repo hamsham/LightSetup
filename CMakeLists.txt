@@ -13,7 +13,7 @@ set(OUTPUT_NAME lssetup)
 include_directories("include")
 
 set(LS_SETUP_SOURCES
-    "src/setup/setup.cpp"
+    "src/setup/Setup.cpp"
 )
 
 
