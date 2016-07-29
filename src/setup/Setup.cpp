@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   setup/setup.cpp
  * Author: Miles Lacey
  *
@@ -6,7 +6,7 @@
  * current platform, OS, compiler, and build target.
  */
 
-#include "lightsky/setup/Setup.h"
+#include "ls/setup/Setup.h"
 
 namespace ls {
 
