@@ -8,8 +8,8 @@
 #ifndef __LS_SETUP_API_H__
 #define __LS_SETUP_API_H__
 
-#include "ls/setup/OS.h"
-#include "ls/setup/Arch.h"
+#include "lightsky/setup/OS.h"
+#include "lightsky/setup/Arch.h"
 
 /*
  * Dynamic Library Setup

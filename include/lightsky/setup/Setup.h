@@ -11,11 +11,11 @@
 
 #include <climits>
 
-#include "ls/setup/Compiler.h"
-#include "ls/setup/Arch.h"
-#include "ls/setup/OS.h"
-#include "ls/setup/Macros.h"
-#include "ls/setup/Api.h"
+#include "lightsky/setup/Compiler.h"
+#include "lightsky/setup/Arch.h"
+#include "lightsky/setup/OS.h"
+#include "lightsky/setup/Macros.h"
+#include "lightsky/setup/Api.h"
 
 namespace ls {
 namespace platform {
