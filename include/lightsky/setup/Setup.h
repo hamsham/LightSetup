@@ -84,7 +84,7 @@ constexpr bool is_64_bit() {
  * @return ls::platform::platform_t::DESKTOP if the current build is targeting
  * a desktop platform, MOBILE if otherwise.
  */
-platform_t get_target_platform();
+platform_t LS_API get_target_platform();
 
 } // end platform namespace
 } // end ls namespace
