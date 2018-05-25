@@ -5,8 +5,8 @@
  * This file contains macros and definitions used throughout LightSky
  */
 
-#ifndef __LS_SETUP_MACROS_H__
-#define __LS_SETUP_MACROS_H__
+#ifndef LS_SETUP_MACROS_H
+#define LS_SETUP_MACROS_H
 
 #include <type_traits>
 
@@ -18,7 +18,7 @@
 #endif /* LS_STRINGIFY */
 
 /*
- * Maxumum value
+ * Maximum value
  */
 #ifndef LS_MAX
 #define LS_MAX(x, y) ((x > y) ? x : y)
@@ -91,4 +91,4 @@
 #define LS_ENUM_VAL( x ) static_cast<std::underlying_type<decltype(x)>::type>(x)
 #endif
 
-#endif /* __LS_SETUP_MACROS_H__ */
+#endif /* LS_SETUP_MACROS_H */

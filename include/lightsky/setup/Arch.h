@@ -7,8 +7,8 @@
  *
  */
 
-#ifndef __LS_SETUP_ARCH_H__
-#define __LS_SETUP_ARCH_H__
+#ifndef LS_SETUP_ARCH_H
+#define LS_SETUP_ARCH_H
 
 /*
  * x86/x64 Processor Family
@@ -79,4 +79,4 @@
     #define LS_ARCH_PS3 1
 #endif
 
-#endif /* __LS_SETUP_ARCH_H__ */
+#endif /* LS_SETUP_ARCH_H */

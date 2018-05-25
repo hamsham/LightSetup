@@ -6,8 +6,8 @@
  * current operating system.
  */
 
-#ifndef __LS_SETUP_OS_H__
-#define __LS_SETUP_OS_H__
+#ifndef LS_SETUP_OS_H
+#define LS_SETUP_OS_H
 
 
 
@@ -88,4 +88,4 @@
     #endif
 #endif
 
-#endif /* __LS_SETUP_OS_H__ */
+#endif /* LS_SETUP_OS_H */

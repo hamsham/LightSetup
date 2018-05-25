@@ -5,8 +5,8 @@
  * Created on October 11, 2015, 3:08 PM
  */
 
-#ifndef __LS_SETUP_API_H__
-#define __LS_SETUP_API_H__
+#ifndef LS_SETUP_API_H
+#define LS_SETUP_API_H
 
 #include "lightsky/setup/OS.h"
 #include "lightsky/setup/Arch.h"
@@ -47,4 +47,4 @@
 
 
 
-#endif  /* __LS_SETUP_API_H__ */
+#endif  /* LS_SETUP_API_H */

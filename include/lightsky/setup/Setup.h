@@ -6,8 +6,8 @@
  * in building LightSky and its modules.
  */
 
-#ifndef __LS_SETUP_SETUP_H__
-#define __LS_SETUP_SETUP_H__
+#ifndef LS_SETUP_SETUP_H
+#define LS_SETUP_SETUP_H
 
 #include <climits>
 
@@ -113,4 +113,4 @@ platform_t LS_API get_target_platform();
 
 
 
-#endif /* __LS_SETUP_SETUP_H__ */
+#endif /* LS_SETUP_SETUP_H */

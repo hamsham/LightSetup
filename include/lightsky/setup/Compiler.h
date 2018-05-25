@@ -7,8 +7,8 @@
  *
  */
 
-#ifndef __LS_SETUP_COMPILER_H__
-#define __LS_SETUP_COMPILER_H__
+#ifndef LS_SETUP_COMPILER_H
+#define LS_SETUP_COMPILER_H
 
 
 
@@ -81,4 +81,4 @@
     #define LS_COMPILER_SN __SNC__
 #endif
 
-#endif /* __LS_SETUP_COMPILER_H__ */
+#endif /* LS_SETUP_COMPILER_H */
