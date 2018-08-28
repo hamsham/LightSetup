@@ -83,6 +83,28 @@
 #endif
 
 /*
+ * Union Template Declaration
+ *
+ * This macro declares a template class as "extern," providing the ability to
+ * use non-instantiated templated classes. It also provides a typedef in order
+ * to give each template type an alias.
+ */
+#ifndef LS_DECLARE_UNION_TYPE
+#define LS_DECLARE_UNION_TYPE(nickName, name, ...)\
+        typedef name<__VA_ARGS__> nickName; \
+        extern template union name<__VA_ARGS__>
+#endif
+
+/*
+ * Union Template Definitions
+ *
+ * This macro is used to explicitly instantiate templated classes.
+ */
+#ifndef LS_DEFINE_UNION_TYPE
+#define LS_DEFINE_UNION_TYPE(name, ...) template union name<__VA_ARGS__>
+#endif
+
+/*
  * The LS_ENUM_VAL macro will extract the numerical value of any type declared
  * using "enum class." A compiler error will be thrown if the input argument is
  * not an enumeration.

@@ -17,12 +17,17 @@
 #include "lightsky/setup/Macros.h"
 #include "lightsky/setup/Api.h"
 
-namespace ls {
-namespace platform {
+
+
+namespace ls
+{
+namespace platform
+{
 
 
 
-enum class platform_t {
+enum class platform_t
+{
     DESKTOP,
     MOBILE
 };
@@ -33,7 +38,8 @@ enum class platform_t {
  * @return The number of bits (typically 8) that are natively stored in a
  * single byte on the current platform.
  */
-constexpr unsigned get_bit_length() {
+constexpr unsigned get_bit_length()
+{
     return CHAR_BIT;
 }
 
@@ -43,8 +49,9 @@ constexpr unsigned get_bit_length() {
  * @return An unsigned integer containing the number of bits per byte. This
  * number is typically 8.
  */
-constexpr unsigned get_byte_length() {
-    return sizeof (char);
+constexpr unsigned get_byte_length()
+{
+    return sizeof(char);
 }
 
 /**
@@ -53,8 +60,9 @@ constexpr unsigned get_byte_length() {
  * @return An unsigned integer containing the number of bits that are required
  * to store a pointer. This is typically 32 or 64 bits.
  */
-constexpr unsigned get_num_platform_bits() {
-    return sizeof (void*) * get_bit_length();
+constexpr unsigned get_num_platform_bits()
+{
+    return sizeof(void*) * get_bit_length();
 }
 
 /**
@@ -62,7 +70,8 @@ constexpr unsigned get_num_platform_bits() {
  *
  * @return TRUE if the current platform is 32-bit, FALSE if otherwise.
  */
-constexpr bool is_32_bit() {
+constexpr bool is_32_bit()
+{
     return 32 == get_num_platform_bits();
 }
 
@@ -71,7 +80,8 @@ constexpr bool is_32_bit() {
  *
  * @return TRUE if the current platform is 64-bit, FALSE if otherwise.
  */
-constexpr bool is_64_bit() {
+constexpr bool is_64_bit()
+{
     return 64 == get_num_platform_bits();
 }
 
@@ -85,7 +95,6 @@ constexpr bool is_64_bit() {
  * a desktop platform, MOBILE if otherwise.
  */
 platform_t LS_API get_target_platform();
-
 } // end platform namespace
 } // end ls namespace
 
