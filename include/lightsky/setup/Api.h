@@ -8,8 +8,9 @@
 #ifndef LS_SETUP_API_H
 #define LS_SETUP_API_H
 
-#include "lightsky/setup/OS.h"
 #include "lightsky/setup/Arch.h"
+#include "lightsky/setup/Compiler.h"
+#include "lightsky/setup/OS.h"
 
 
 
@@ -39,10 +40,48 @@
 /*
  * Calling Conventions
  */
-#if defined (LS_ARCH_X86) && defined (LS_OS_WINDOWS)
-    #define LS_CALL __stdcall
+#if defined(LS_ARCH_X86)
+    #if defined(LS_OS_WINDOWS)
+        #define LS_C_CALL __stdcall
+    #elif defined LS_COMPILER_GNU
+        #define LS_C_CALL __attribute__ ((stdcall))
+    #endif
 #else
-    #define LS_CALL
+    #define LS_C_CALL
+#endif
+
+
+
+/*
+ * Object Inlining and Calling Conventions to be used in performance-sensitive functions
+ */
+#if defined(LS_COMPILER_MSC) || defined(LS_COMPILER_BORLAND)
+    #define LS_INLINE __forceinline
+
+	#ifdef LS_ARCH_X86 && (LS_ARCH_X86 == 32)
+		#define LS_FASTCALL __fastcall
+    #else
+		#define LS_FASTCALL
+    #endif
+
+#elif defined (LS_COMPILER_GNU)
+    #define LS_INLINE inline __attribute__((always_inline))
+
+	#if defined (LS_ARCH_X86) && (LS_ARCH_X86 == 32)
+			#define LS_FASTCALL __attribute__((__fastcall__))
+    #else
+        #define LS_FASTCALL
+    #endif
+
+#else
+    #define LS_INLINE inline
+    #define LS_FASTCALL
+#endif
+
+
+
+#ifndef LS_IMPERATIVE
+    #define LS_IMPERATIVE LS_INLINE LS_FASTCALL
 #endif
 
 

@@ -28,13 +28,14 @@
  */
 #if defined (_MSC_VER)
     #define LS_COMPILER_MSC _MSC_VER
+#endif
 
 
 
-#elif defined (__GNUC__) || defined (__MINGW32__) || defined (__MINGW_64__)
+#if defined(__GNUC__) || defined(__GNUG__) || defined(__MINGW32__) || defined(__MINGW_64__)
     #define LS_COMPILER_GNU __GNUC__
 
-    #if defined (__clang__)
+    #if defined(__clang__)
         #define LS_COMPILER_CLANG __clang__
         #define LS_COMPILER_CLANG_MAJ __clang_major__
         #define LS_COMPILER_CLANG_MIN __clang_minor__
@@ -43,28 +44,41 @@
         #define LS_COMPILER_GCC_MAJ __GNUC_MINOR__
         #define LS_COMPILER_GCC_MIN __GNUC_PATCHLEVEL__
     #endif
+#endif
 
 
 
 /*
  * Intel Compiler
  */
-#elif defined (__INTEL_COMPILER)
+#if defined (__INTEL_COMPILER)
     #define LS_COMPILER_INTEL __INTEL_COMPILER
+#endif
 
 
 
-#elif defined (__BORLANDC__) || defined (__CODEGEARC__)
+/*
+ * Borland
+ */
+#if defined (__BORLANDC__) || defined (__CODEGEARC__)
     #define LS_COMPILER_BORLAND LS_MAX( (__BORLANDC__), (__CODEGEARC__) )
+#endif
 
 
 
-#elif defined (__CC_ARM)
+/*
+ * ARM Compiler
+ */
+#if defined (__CC_ARM)
     #define LS_COMPILER_ARM __ARMCC_VERSION
+#endif
 
 
 
-#elif defined (__IBMCPP__)
+/*
+ * IBM Compiler
+ */
+#if defined (__IBMCPP__)
     #ifdef(__COMPILER_VER__)
         /* IBM z/OS Compiler */
         #define LS_COMPILER_IBM 0
@@ -74,11 +88,17 @@
         #define LS_COMPILER_IBM 1
         #define LS_COMPILER_XL __IBMCPP__
     #endif
+#endif
 
 
 
-#elif defined (__SNC__)
+/*
+ * Sony's SNC
+ */
+#if defined (__SNC__)
     #define LS_COMPILER_SN __SNC__
 #endif
+
+
 
 #endif /* LS_SETUP_COMPILER_H */
