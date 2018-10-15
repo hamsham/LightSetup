@@ -58,7 +58,7 @@
 #if defined(LS_COMPILER_MSC) || defined(LS_COMPILER_BORLAND)
     #define LS_INLINE __forceinline
 
-	#ifdef LS_ARCH_X86 && (LS_ARCH_X86 == 32)
+	#if defined(LS_ARCH_X86) && (LS_ARCH_X86 == 32)
 		#define LS_FASTCALL __fastcall
     #else
 		#define LS_FASTCALL
