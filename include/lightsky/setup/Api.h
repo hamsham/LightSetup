@@ -68,7 +68,7 @@
     #define LS_INLINE __attribute__((always_inline))
 
 	#if defined (LS_ARCH_X86) && (LS_ARCH_X86 == 32)
-			#define LS_FASTCALL __attribute__((__fastcall__))
+			#define LS_FASTCALL __attribute__((fastcall))
     #else
         #define LS_FASTCALL
     #endif
