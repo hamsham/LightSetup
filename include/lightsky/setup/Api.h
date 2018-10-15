@@ -65,7 +65,7 @@
     #endif
 
 #elif defined (LS_COMPILER_GNU)
-    #define LS_INLINE inline __attribute__((always_inline))
+    #define LS_INLINE __attribute__((always_inline))
 
 	#if defined (LS_ARCH_X86) && (LS_ARCH_X86 == 32)
 			#define LS_FASTCALL __attribute__((__fastcall__))
