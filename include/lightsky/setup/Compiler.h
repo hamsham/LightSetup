@@ -32,6 +32,15 @@
 
 
 
+/*
+ * MinGW Compiler
+ */
+#if defined(__MINGW32__) || defined(__MINGW_64__)
+    #define LS_COMPILER_MINGW
+#endif
+
+
+
 #if defined(__GNUC__) || defined(__GNUG__) || defined(__MINGW32__) || defined(__MINGW_64__)
     #define LS_COMPILER_GNU __GNUC__
 
