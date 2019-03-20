@@ -52,7 +52,7 @@
 /*
  * Arm Processors
  */
-#if defined (__arm__) || defined (_M_ARM) || defined (__TARGET_ARCH_ARM)
+#if defined (__arm__) || defined (_M_ARM) || defined (__TARGET_ARCH_ARM) || defined(__aarch64__)
     #define LS_ARCH_ARM 1
     #define LS_ARCH_ARM_VER LS_MAX( (__TARGET_ARCH_ARM), (_M_ARM) )
 
