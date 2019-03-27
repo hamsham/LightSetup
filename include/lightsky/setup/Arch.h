@@ -57,6 +57,13 @@
     #define LS_ARCH_ARM_VER LS_MAX( (__TARGET_ARCH_ARM), (_M_ARM) )
 
     /*
+     * 64-bit ARM
+     */
+    #if defined(__aarch64__)
+        #define LS_ARCH_AARCH64
+    #endif
+
+    /*
      * Thumb-Mode
      */
     #if defined (__thumb__) || defined (__TARGET_ARCH_THUMB) || defined (_M_ARMT)
