@@ -18,7 +18,7 @@
     #define LS_ARCH_X86_VER 6 /* Assuming modern processors */
 
 #elif defined (_WIN32) || defined (__i386__) || defined (_M_IX86_) || defined (__THW_INTEL__)
-    #ifndef LS_ARCH_x86
+    #ifndef LS_ARCH_X86
         #define LS_ARCH_X86 32
     #endif
 
