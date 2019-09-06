@@ -86,4 +86,17 @@
 
 
 
+/*
+ * Pointer Restriction (a.k.a. non-aliased)
+ */
+#if defined(LS_COMPILER_MSC) || defined(LS_COMPILER_BORLAND)
+    #define LS_RESTRICT_PTR __restrict
+#elif defined (LS_COMPILER_GNU)
+    #define LS_RESTRICT_PTR __restrict__
+#else
+    #define LS_RESTRICT_PTR
+#endif
+
+
+
 #endif  /* LS_SETUP_API_H */
