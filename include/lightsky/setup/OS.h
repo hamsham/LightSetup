@@ -42,7 +42,7 @@
 
 
 /* Mac OSX */
-#if defined (macintosh) || defined (Macintosh) || (defined (__APPLE__) && defined (__MACH__))
+#if defined (macintosh) || defined (Macintosh) || defined (__APPLE__) || defined (__MACH__)
     #include "TargetConditionals.h"
     #ifdef TARGET_OS_MAC
         #if TARGET_OS_MAC > 0
@@ -66,7 +66,7 @@
 
 
 /* Unix */
-#if defined (__unix__) || defined (__unix)
+#if defined (__unix__) || defined (__unix) || defined(__APPLE__) // since OSX 10.5
     #define LS_OS_UNIX 1
 #endif
 
