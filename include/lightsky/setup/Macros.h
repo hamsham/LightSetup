@@ -169,5 +169,23 @@
     #define LS_PREFETCH(p, rw, level)
 #endif
 
+#if defined(LS_COMPILER_GNU) || defined(LS_COMPILER_CLANG)
+    #ifndef LS_LIKELY
+        #define LS_LIKELY(x) __builtin_expect((x), 1)
+    #endif
+
+    #ifndef LS_UNLIKELY
+        #define LS_UNLIKELY(x) __builtin_expect((x), 0)
+    #endif
+#else
+    #ifndef LS_LIKELY
+        #define LS_LIKELY(x) (x)
+    #endif
+
+    #ifndef LS_UNLIKELY
+        #define LS_UNLIKELY(x) (x)
+    #endif
+#endif
+
 
 #endif /* LS_SETUP_MACROS_H */
