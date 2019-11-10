@@ -127,7 +127,10 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         elseif(HAVE_ARM_V8A)
             target_compile_options(${OUTPUT_NAME}
                 INTERFACE
-                    -march=armv8-a+fp16+simd
+                    #-march=armv8-a+fp16+simd
+                    -march=armv8-a
+                    -mfpu=neon-fp16
+                    -mfp16-format=ieee
                     -faligned-new)
         endif()
     endif()
