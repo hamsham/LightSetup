@@ -23,6 +23,7 @@ set(LS_SETUP_HEADERS
     include/lightsky/setup/Macros.h
     include/lightsky/setup/OS.h
     include/lightsky/setup/Setup.h
+    include/lightsky/setup/Types.h
 )
 
 

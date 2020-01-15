@@ -11,11 +11,12 @@
 
 #include <climits>
 
-#include "lightsky/setup/Compiler.h"
-#include "lightsky/setup/Arch.h"
-#include "lightsky/setup/OS.h"
-#include "lightsky/setup/Macros.h"
 #include "lightsky/setup/Api.h"
+#include "lightsky/setup/Arch.h"
+#include "lightsky/setup/Compiler.h"
+#include "lightsky/setup/Macros.h"
+#include "lightsky/setup/OS.h"
+#include "lightsky/setup/Types.h"
 
 
 
