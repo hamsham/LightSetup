@@ -156,8 +156,11 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
                 -mbmi)  # TZCNT
 
         if(NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-            target_compile_options(${OUTPUT_NAME} INTERFACE -mfpmath=both)
-            #target_compile_options(${OUTPUT_NAME} INTERFACE -march=core2)
+            target_compile_options(${OUTPUT_NAME}
+                INTERFACE
+                    -mno-avx256-split-unaligned-load
+                    -mno-avx256-split-unaligned-store
+                    -mfpmath=both)
         endif()
     endif()
 
