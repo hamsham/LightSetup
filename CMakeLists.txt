@@ -116,8 +116,6 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     endif()
 
     if (ENABLE_ARM_OPTIMIZATIONS)
-        message("-- ARM compiler optimizations enabled.")
-
         if (HAVE_ARM_V7A)
             target_compile_options(${OUTPUT_NAME}
                 INTERFACE
@@ -125,6 +123,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
                     -mfloat-abi=hard
                     -mfpu=neon-vfpv4+fp16
                     -mno-unaligned-access)
+            message("-- ARM-v7a compiler optimizations enabled.")
         elseif(HAVE_ARM_V8A)
             target_compile_options(${OUTPUT_NAME}
                 INTERFACE
@@ -133,6 +132,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
                     #-mfpu=neon-fp16
                     #-mfp16-format=ieee
                     -faligned-new)
+            message("-- ARM-v8a compiler optimizations enabled.")
         endif()
     endif()
 
