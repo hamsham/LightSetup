@@ -65,17 +65,17 @@ include(CheckCXXSymbolExists)
 
 check_include_file(immintrin.h HAVE_X86_SIMD)
 check_include_file(arm_neon.h HAVE_ARM_SIMD)
+check_include_file(arm_neon.h HAVE_ARM_SIMD_ALT -march=armv7-a+neon-fp16 -mfloat-abi=hard -mhard-float -mfpu=neon-fp16)
 
-check_cxx_compiler_flag(-mfpu=neon-vfpv4+fp16    HAVE_ARM_V7A)
-check_cxx_compiler_flag(-march=armv8-a+fp16+simd HAVE_ARM_V8A)
-check_cxx_compiler_flag(-mfpu=neon-fp16          HAVE_ARM_V8A_ALT)
+check_cxx_compiler_flag(-march=armv7-a+neon-vfpv4 HAVE_ARM_V7A)
+check_cxx_compiler_flag(-march=armv8-a+fp16+simd  HAVE_ARM_V8A)
 
 if (HAVE_X86_SIMD)
     option(ENABLE_X86_OPTIMIZATIONS "Enable x86-specific compiler optimization flags." ON)
 endif()
 
-if (HAVE_ARM_V7A OR HAVE_ARM_V8A OR HAVE_ARM_V8A_ALT)
-    if (HAVE_ARM_SIMD)
+if (HAVE_ARM_V7A OR HAVE_ARM_V8A)
+    if (HAVE_ARM_SIMD OR HAVE_ARM_SIMD_ALT)
         option(ENABLE_ARM_OPTIMIZATIONS "Enable arm-specific compiler optimization flags." ON)
     endif()
 endif()
@@ -123,21 +123,14 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
                 -march=armv8-a+fp16+simd
                 -faligned-new)
             message("-- ARM-v8a compiler optimizations enabled.")
-        elseif(HAVE_ARM_V8A_ALT)
-            target_compile_options(${OUTPUT_NAME}
-                INTERFACE
-                -march=armv8-a
-                -mfpu=neon-fp16
-                -mfp16-format=ieee
-                -faligned-new)
-            message("-- ARM-v8a (alternate) compiler optimizations enabled.")
         elseif (HAVE_ARM_V7A)
             target_compile_options(${OUTPUT_NAME}
                 INTERFACE
-                    -march=armv7-a
+                    -march=armv7-a+neon-fp16
                     -mhard-float
                     -mfloat-abi=hard
-                    -mfpu=neon-vfpv4+fp16
+                    -mfpu=neon-fp16
+                    -mfp16-format=ieee
                     -mno-unaligned-access)
             message("-- ARM-v7a compiler optimizations enabled.")
         endif()
