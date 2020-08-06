@@ -65,7 +65,7 @@ include(CheckCXXSymbolExists)
 
 check_include_file(immintrin.h HAVE_X86_SIMD)
 check_include_file(arm_neon.h HAVE_ARM_SIMD)
-check_include_file(arm_neon.h HAVE_ARM_SIMD_ALT -march=armv7-a+neon-fp16 -mfloat-abi=hard -mhard-float -mfpu=neon-fp16)
+check_include_file(arm_neon.h HAVE_ARM_SIMD_ALT -march=armv7-a+neon-vfpv4 -mfloat-abi=hard -mhard-float -mfpu=neon-vfpv4)
 
 check_cxx_compiler_flag(-march=armv7-a+neon-vfpv4 HAVE_ARM_V7A)
 check_cxx_compiler_flag(-march=armv8-a+fp16+simd  HAVE_ARM_V8A)
@@ -126,10 +126,10 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         elseif (HAVE_ARM_V7A)
             target_compile_options(${OUTPUT_NAME}
                 INTERFACE
-                    -march=armv7-a+neon-fp16
+                    -march=armv7-a+neon-vfpv4
                     -mhard-float
                     -mfloat-abi=hard
-                    -mfpu=neon-fp16
+                    -mfpu=neon-vfpv4
                     -mfp16-format=ieee
                     -mno-unaligned-access)
             message("-- ARM-v7a compiler optimizations enabled.")
