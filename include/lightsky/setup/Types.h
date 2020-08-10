@@ -305,21 +305,64 @@ struct IsSigned<unsigned long long> : public setup::FalseType<unsigned long long
  * General Implementation
 -------------------------------------*/
 template <typename data_t>
-struct IsUnsigned
+struct IsUnsigned : public TrueType<data_t>
 {
-    typedef data_t value_type;
+};
 
-    static constexpr bool value = !IsSigned<data_t>::value;
 
-    constexpr explicit operator bool() const noexcept
-    {
-        return value;
-    }
 
-    constexpr bool operator() () const noexcept
-    {
-        return value;
-    }
+template <>
+struct IsSigned<signed char> : public setup::FalseType<signed char>
+{
+};
+
+
+
+template <>
+struct IsSigned<signed short> : public setup::FalseType<signed short>
+{
+};
+
+
+
+template <>
+struct IsSigned<signed int> : public setup::FalseType<signed int>
+{
+};
+
+
+
+template <>
+struct IsSigned<signed long> : public setup::FalseType<signed long>
+{
+};
+
+
+
+template <>
+struct IsSigned<signed long long> : public setup::FalseType<signed long long>
+{
+};
+
+
+
+template <>
+struct IsUnsigned<float> : public setup::FalseType<float>
+{
+};
+
+
+
+template <>
+struct IsUnsigned<double> : public setup::FalseType<double>
+{
+};
+
+
+
+template <>
+struct IsUnsigned<long double> : public setup::FalseType<long double>
+{
 };
 
 
