@@ -312,35 +312,35 @@ struct IsUnsigned : public TrueType<data_t>
 
 
 template <>
-struct IsSigned<signed char> : public setup::FalseType<signed char>
+struct IsUnsigned<signed char> : public setup::FalseType<signed char>
 {
 };
 
 
 
 template <>
-struct IsSigned<signed short> : public setup::FalseType<signed short>
+struct IsUnsigned<signed short> : public setup::FalseType<signed short>
 {
 };
 
 
 
 template <>
-struct IsSigned<signed int> : public setup::FalseType<signed int>
+struct IsUnsigned<signed int> : public setup::FalseType<signed int>
 {
 };
 
 
 
 template <>
-struct IsSigned<signed long> : public setup::FalseType<signed long>
+struct IsUnsigned<signed long> : public setup::FalseType<signed long>
 {
 };
 
 
 
 template <>
-struct IsSigned<signed long long> : public setup::FalseType<signed long long>
+struct IsUnsigned<signed long long> : public setup::FalseType<signed long long>
 {
 };
 
