@@ -94,7 +94,11 @@ inline void cpu_yield() noexcept;
 
 inline LS_INLINE int64_t ls::setup::cpu_read_ticks() noexcept
 {
-    return _rdtsc();
+    #if defined(LS_COMPILER_MSC)
+        return (int64_t)__rdtsc();
+    #else
+        return _rdtsc();
+    #endif
 }
 
 
