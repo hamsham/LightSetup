@@ -10,8 +10,6 @@ set(OUTPUT_NAME lssetup)
 # -------------------------------------
 # Source Paths
 # -------------------------------------
-include_directories(include)
-
 set(LS_SETUP_SOURCES
     src/Setup.cpp
 )
@@ -41,6 +39,8 @@ else()
 endif()
 
 add_library(${OUTPUT_NAME} ${LS_LIB_TYPE} ${LS_SETUP_SOURCES} ${LS_SETUP_HEADERS})
+
+target_include_directories(${OUTPUT_NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>)
 
 
 
