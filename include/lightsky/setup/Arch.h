@@ -43,6 +43,64 @@
 #endif
 
 /*
+ * x86-CPU Features
+ */
+#ifdef LS_ARCH_X86
+    #ifdef __SSE__
+        #define LS_X86_SSE
+    #endif
+
+    #ifdef __SSE2__
+        #define LS_X86_SSE2
+    #endif
+
+    #ifdef __SSE3__
+        #define LS_X86_SSE3
+    #endif
+
+    #ifdef __SSSE3__
+        #define LS_X86_SSSE3
+    #endif
+
+    #ifdef __SSE4_1__
+        #define LS_X86_SSE4_1
+    #endif
+
+    #ifdef __SSE4_2__
+        #define LS_X86_SSE4_2
+    #endif
+
+    #ifdef __AVX__
+        #define LS_X86_AVX
+    #endif
+
+    #ifdef __AVX2__
+        #define LS_X86_AVX2
+    #endif
+
+    #ifdef __F16C__
+        #define LS_X86_FP16
+    #endif
+
+    #ifdef __BMI__
+        #define LS_X86_BMI
+    #endif
+
+    #ifdef __LZCNT__
+        #define LS_X86_LZCNT
+    #endif
+
+    #ifdef __POPCNT__
+        #define LS_X86_POPCNT
+    #endif
+
+    #ifdef __FMA__
+        #define LS_X86_FMA
+    #endif
+
+#endif
+
+/*
  * Itanium
  */
 #if defined (__IA64__) || defined (_M_IA64) || defined (__itanium__)
