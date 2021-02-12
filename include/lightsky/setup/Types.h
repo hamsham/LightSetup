@@ -185,6 +185,41 @@ struct IsSame<T, T> : public setup::TrueType<bool>
 
 
 /*-----------------------------------------------------------------------------
+ * Replacement for std::is_base_of
+-----------------------------------------------------------------------------*/
+template <class B, class D>
+struct IsBaseOf
+{
+  private:
+    static constexpr bool _base_value(const B* const) noexcept
+    {
+        return true;
+    }
+
+    static constexpr bool _base_value(const void* const) noexcept
+    {
+        return false;
+    }
+
+  public:
+
+
+    static constexpr bool value = _base_value(static_cast<const D*>(nullptr));
+
+    constexpr explicit operator bool() const noexcept
+    {
+        return value;
+    }
+
+    constexpr bool operator() () const noexcept
+    {
+        return value;
+    }
+};
+
+
+
+/*-----------------------------------------------------------------------------
  * Replacement for std::is_integral
 -----------------------------------------------------------------------------*/
 /*-------------------------------------
@@ -329,6 +364,13 @@ struct IsSigned<unsigned long long> : public setup::FalseType<unsigned long long
 -------------------------------------*/
 template <typename data_t>
 struct IsUnsigned : public TrueType<data_t>
+{
+};
+
+
+
+template <>
+struct IsUnsigned<char> : public setup::FalseType<char>
 {
 };
 

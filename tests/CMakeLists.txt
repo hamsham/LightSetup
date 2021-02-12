@@ -22,4 +22,4 @@ function(LS_SETUP_ADD_TARGET target sources)
 endfunction(LS_SETUP_ADD_TARGET)
 
 LS_SETUP_ADD_TARGET(lssetup_cpu_timer_test lssetup_cpu_timer_test.cpp)
-
+LS_SETUP_ADD_TARGET(lssetup_types_test     lssetup_types_test.cpp)
