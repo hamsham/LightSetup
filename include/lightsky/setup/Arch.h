@@ -131,6 +131,15 @@
 #endif
 
 /*
+ * NEON Detection
+ */
+#ifdef LS_ARCH_ARM
+    #if defined(LS_ARCH_AARCH64) ||defined(__ARM_NEON)
+        #define LS_ARM_NEON
+    #endif
+#endif
+
+/*
  * PowerPC
  */
 #if defined (__ppc__) || defined (_M_PPC) || defined (_ARCH_PPC)
