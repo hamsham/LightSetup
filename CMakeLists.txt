@@ -166,6 +166,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     if (ENABLE_X86_OPTIMIZATIONS)
+        message("-- x86 compiler optimizations enabled.")
         target_compile_options(${OUTPUT_NAME} INTERFACE /arch:AVX2) # enable AVX2
     endif()
 
@@ -216,7 +217,11 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
             /wd4774 # Format string is not a string literal in sprintf_s
             /wd4868 # compiler may not enforce left-to-right evaluation order in braced initializer list
             /wd5039 # An 'extern "C"' function contains something which might throw an exception
-            /wd4244) # possible loss of data when converting between time_t and unsigned int
+            /wd4244 # possible loss of data when converting between time_t and unsigned int
+            /wd4710 # Error if a function was not inlined
+            /wd5045 # Insertion of spectre mitigations
+            /wd4702 # Unreachable code
+    )
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "Intel")
     target_compile_options(${OUTPUT_NAME}
         INTERFACE

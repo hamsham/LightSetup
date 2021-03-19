@@ -46,56 +46,56 @@
  * x86-CPU Features
  */
 #ifdef LS_ARCH_X86
-    #ifdef __SSE__
-        #define LS_X86_SSE
-    #endif
-
-    #ifdef __SSE2__
-        #define LS_X86_SSE2
-    #endif
-
-    #ifdef __SSE3__
-        #define LS_X86_SSE3
-    #endif
-
-    #ifdef __SSSE3__
-        #define LS_X86_SSSE3
-    #endif
-
-    #ifdef __SSE4_1__
-        #define LS_X86_SSE4_1
-    #endif
-
-    #ifdef __SSE4_2__
-        #define LS_X86_SSE4_2
-    #endif
-
-    #ifdef __AVX__
-        #define LS_X86_AVX
-    #endif
-
-    #ifdef __AVX2__
+    #if defined(__AVX2__) || defined(__AVX512__)
         #define LS_X86_AVX2
     #endif
 
-    #ifdef __F16C__
+    #if defined(__AVX__) || defined(LS_X86_AVX2)
+        #define LS_X86_AVX
+    #endif
+
+    #if defined(__SSE4_2__) || defined(LS_X86_AVX)
+        #define LS_X86_SSE4_2
+    #endif
+
+    #if defined(__SSE4_1__) || defined(LS_X86_SSE4_2)
+        #define LS_X86_SSE4_1
+    #endif
+
+    #if defined(__SSSE3__) || defined(LS_X86_SSE4_1)
+        #define LS_X86_SSSE3
+    #endif
+
+    #if defined(__SSE3__) || defined(LS_X86_SSSE3)
+        #define LS_X86_SSE3
+    #endif
+
+    #if defined(__SSE2__) || defined(LS_X86_SSE3)
+        #define LS_X86_SSE2
+    #endif
+
+    #if defined(__SSE__) || defined(LS_X86_SSE2)
+        #define LS_X86_SSE
+    #endif
+
+    #if defined(__F16C__) || defined(LS_X86_AVX2)
         #define LS_X86_FP16
     #endif
 
-    #ifdef __BMI__
+    #if defined(__FMA__) || defined(LS_X86_AVX2)
+        #define LS_X86_FMA
+    #endif
+
+    #if defined(__BMI__) || defined(LS_X86_AVX2)
         #define LS_X86_BMI
     #endif
 
-    #ifdef __LZCNT__
+    #if defined(__LZCNT__) || defined(LS_X86_SSE4_2)
         #define LS_X86_LZCNT
     #endif
 
-    #ifdef __POPCNT__
+    #if defined(__POPCNT__) || defined(LS_X86_SSE4_2)
         #define LS_X86_POPCNT
-    #endif
-
-    #ifdef __FMA__
-        #define LS_X86_FMA
     #endif
 
 #endif
