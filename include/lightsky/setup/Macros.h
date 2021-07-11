@@ -136,21 +136,45 @@
  * compiler to determine which cache-level should be used to store the
  * prefetched data.
  */
-#ifndef LS_PREFETCH_LEVEL_NONTEMPORAL
-    #define LS_PREFETCH_LEVEL_NONTEMPORAL 0
+#ifndef LS_ARCH_X86
+    #ifndef LS_PREFETCH_LEVEL_NONTEMPORAL
+        #define LS_PREFETCH_LEVEL_NONTEMPORAL 0
+    #endif
+
+    #ifndef LS_PREFETCH_LEVEL_L1
+        #define LS_PREFETCH_LEVEL_L1 1
+    #endif
+
+    #ifndef LS_PREFETCH_LEVEL_L2
+        #define LS_PREFETCH_LEVEL_L2 2
+    #endif
+
+    #ifndef LS_PREFETCH_LEVEL_L3
+        #define LS_PREFETCH_LEVEL_L3 3
+    #endif
+
+#else
+    #include <immintrin.h>
+
+    #ifndef LS_PREFETCH_LEVEL_NONTEMPORAL
+        #define LS_PREFETCH_LEVEL_NONTEMPORAL _MM_HINT_NTA
+    #endif
+
+    #ifndef LS_PREFETCH_LEVEL_L1
+        #define LS_PREFETCH_LEVEL_L1 _MM_HINT_T0
+    #endif
+
+    #ifndef LS_PREFETCH_LEVEL_L2
+        #define LS_PREFETCH_LEVEL_L2 _MM_HINT_T1
+    #endif
+
+    #ifndef LS_PREFETCH_LEVEL_L3
+        #define LS_PREFETCH_LEVEL_L3 _MM_HINT_T2
+    #endif
+
 #endif
 
-#ifndef LS_PREFETCH_LEVEL_L1
-    #define LS_PREFETCH_LEVEL_L1 1
-#endif
 
-#ifndef LS_PREFETCH_LEVEL_L2
-    #define LS_PREFETCH_LEVEL_L2 2
-#endif
-
-#ifndef LS_PREFETCH_LEVEL_L3
-    #define LS_PREFETCH_LEVEL_L3 3
-#endif
 
 #ifndef LS_PREFETCH_ACCESS_R
     #define LS_PREFETCH_ACCESS_R 0
@@ -160,8 +184,9 @@
     #define LS_PREFETCH_ACCESS_RW 1
 #endif
 
+
+
 #if defined(LS_ARCH_X86)
-    #include <immintrin.h>
     #define LS_PREFETCH(p, rw, level) _mm_prefetch((const char*)(p), level)
 
 #elif defined(LS_ARCH_AARCH64)
