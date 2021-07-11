@@ -160,11 +160,17 @@
     #define LS_PREFETCH_ACCESS_RW 1
 #endif
 
-#if defined(LS_COMPILER_GNU) || defined(LS_COMPILER_CLANG)
-    #define LS_PREFETCH(p, rw, level) __builtin_prefetch((const void*)(p), rw, level)
-#elif defined(LS_ARCH_X86)
+#if defined(LS_ARCH_X86)
     #include <immintrin.h>
     #define LS_PREFETCH(p, rw, level) _mm_prefetch((const char*)(p), level)
+
+#elif defined(LS_ARCH_AARCH64)
+    #include <arm_acle.h>
+    #define LS_PREFETCH(p, rw, level) __pldx(rw, level > 2 ? 2 : level, level != 0, p)
+
+#elif defined(LS_COMPILER_GNU) || defined(LS_COMPILER_CLANG)
+    #define LS_PREFETCH(p, rw, level) __builtin_prefetch((const void*)(p), rw, level)
+
 #else
     #define LS_PREFETCH(p, rw, level)
 #endif
