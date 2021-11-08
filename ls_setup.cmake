@@ -118,10 +118,10 @@ endfunction()
 function(_ls_configure_msvc_target target)
     if (ENABLE_X86_OPTIMIZATIONS)
         message("-- x86 compiler optimizations enabled.")
-        target_compile_options(${OUTPUT_NAME} INTERFACE /arch:AVX2) # enable AVX2
+        target_compile_options(${target} INTERFACE /arch:AVX2) # enable AVX2
     endif()
 
-    target_compile_options(${OUTPUT_NAME}
+    target_compile_options(${target}
         PRIVATE
             /GL # global program optimization
             /Gw # Whole-program optimization
@@ -139,8 +139,8 @@ function(_ls_configure_msvc_target target)
             /Zc:rvalueCast /Zc:strictStrings /Zc:inline
             /fp:fast
     )
-    #target_compile_options(${OUTPUT_NAME} INTERFACE /Gv) # Enable __vectorcall conventions
-    #target_compile_options(${OUTPUT_NAME} INTERFACE /Ox) # Optimize, optimize, optimize
+    #target_compile_options(${target} INTERFACE /Gv) # Enable __vectorcall conventions
+    #target_compile_options(${target} INTERFACE /Ox) # Optimize, optimize, optimize
 
     # Prevent libraries from being rebuilt
     set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS}    /LTCG:INCREMENTAL")
@@ -149,13 +149,13 @@ function(_ls_configure_msvc_target target)
     set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} /LTCG:INCREMENTAL")
 
     # Extra enabled warnings
-    target_compile_options(${OUTPUT_NAME}
+    target_compile_options(${target}
         PRIVATE
             /we4700 # Enable check for use of uninitialized variables
             /we4533) # Code initializing a variable will not be executed
 
     # Disabled warnings
-    target_compile_options(${OUTPUT_NAME}
+    target_compile_options(${target}
         PRIVATE
             /wd4146 # unsigned negation using the '-' operator
             /wd4996 # insecure use of wcstombs
