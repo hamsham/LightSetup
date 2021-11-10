@@ -126,7 +126,6 @@ function(_ls_configure_msvc_target target)
             /GL # global program optimization
             /Gw # Whole-program optimization
             /GA # Windows program optimizations
-            /MT # Enable multi-threaded application linking
             /Oi # enable instrinsic functions
             /Ot # favor fast code
             /Oy # Omit frame pointers
@@ -143,10 +142,7 @@ function(_ls_configure_msvc_target target)
     #target_compile_options(${target} INTERFACE /Ox) # Optimize, optimize, optimize
 
     # Prevent libraries from being rebuilt
-    set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS}    /LTCG:INCREMENTAL")
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /LTCG:INCREMENTAL")
-    set(CMAKE_STATIC_LINKER_FLAGS "${CMAKE_STATIC_LINKER_FLAGS} /LTCG:INCREMENTAL")
-    set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} /LTCG:INCREMENTAL")
+    set_target_properties(${target} PROPERTIES LINK_FLAGS "/LTCG /IGNORE:4075")
 
     # Extra enabled warnings
     target_compile_options(${target}
