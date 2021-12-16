@@ -28,6 +28,24 @@ if (HAVE_ARM_V7A OR HAVE_ARM_V8A)
 endif()
 
 
+if (ENABLE_PROFILING)
+    message("-- Profiling enabled")
+endif()
+
+if (ENABLE_ARM_OPTIMIZATIONS)
+    if(HAVE_ARM_V8A)
+        message("-- ARM-v8a compiler optimizations enabled.")
+
+    elseif (HAVE_ARM_V7A)
+        message("-- ARM-v7a compiler optimizations enabled.")
+    endif()
+endif()
+
+if (ENABLE_X86_OPTIMIZATIONS)
+    message("-- x86 compiler optimizations enabled.")
+endif()
+
+
 
 # -------------------------------------
 # GCC & Clang Options
@@ -49,7 +67,6 @@ function(_ls_configure_gnu_target target)
     )
 
     if (ENABLE_PROFILING)
-        message("-- Profiling enabled")
         target_compile_options(${target} PRIVATE -pg)
         set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg -Og") # failsafe
     else()
@@ -63,7 +80,6 @@ function(_ls_configure_gnu_target target)
                     -march=armv8-a+fp16+simd
                     -faligned-new
             )
-            message("-- ARM-v8a compiler optimizations enabled.")
 
         elseif (HAVE_ARM_V7A)
             target_compile_options(${target}
@@ -75,12 +91,10 @@ function(_ls_configure_gnu_target target)
                     -mfp16-format=ieee
                     -mno-unaligned-access
             )
-            message("-- ARM-v7a compiler optimizations enabled.")
         endif()
     endif()
 
     if (ENABLE_X86_OPTIMIZATIONS)
-        message("-- x86 compiler optimizations enabled.")
         target_compile_options(${target}
             INTERFACE
                 -mmmx
@@ -117,7 +131,6 @@ endfunction()
 # -------------------------------------
 function(_ls_configure_msvc_target target)
     if (ENABLE_X86_OPTIMIZATIONS)
-        message("-- x86 compiler optimizations enabled.")
         target_compile_options(${target} INTERFACE /arch:AVX2) # enable AVX2
     endif()
 
@@ -210,16 +223,21 @@ endfunction()
 # -------------------------------------
 # Target Setup
 # -------------------------------------
+# Debug Symbols
+if (CMAKE_BUILD_TYPE)
+    string(TOLOWER ${CMAKE_BUILD_TYPE} _CURRENT_BUILD_TYPE)
+    if(${_CURRENT_BUILD_TYPE} STREQUAL debug OR ${_CURRENT_BUILD_TYPE} STREQUAL relwithdebinfo)
+        set(LS_ENABLE_DEBUG_BUILD_FLAGS TRUE)
+        message("-- Debug mode enabled.")
+    else()
+        message("-- Release mode enabled.")
+    endif()
+endif()
+
 function(ls_configure_target target)
     # Debug Symbols
-    if (CMAKE_BUILD_TYPE)
-        string(TOLOWER ${CMAKE_BUILD_TYPE} _CURRENT_BUILD_TYPE)
-        if(${_CURRENT_BUILD_TYPE} STREQUAL debug OR ${_CURRENT_BUILD_TYPE} STREQUAL relwithdebinfo)
-            message("-- Debug mode enabled.")
-            target_compile_definitions(${target} INTERFACE -DLS_DEBUG)
-        else()
-            message("-- Release mode enabled.")
-        endif()
+    if (LS_ENABLE_DEBUG_BUILD_FLAGS)
+        target_compile_definitions(${target} INTERFACE -DLS_DEBUG)
     endif()
 
     # Fix broken search paths on OS X
