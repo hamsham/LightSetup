@@ -189,7 +189,7 @@
 #if defined(LS_ARCH_X86)
     #define LS_PREFETCH(p, rw, level) _mm_prefetch((const char*)(p), level)
 
-#elif defined(LS_ARCH_AARCH64)
+#elif defined(LS_ARCH_AARCH64) && defined(LS_COMPILER_CLANG)
     #include <arm_acle.h>
     #define LS_PREFETCH(p, rw, level) __pldx(rw, level > 2 ? 2 : level, level != 0, p)
 
