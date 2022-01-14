@@ -252,4 +252,14 @@ function(ls_configure_target target)
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "Intel")
         _ls_configure_icc_target(${target})
     endif()
+
+    # MinGW doesn't always play nice with the Windows SDK
+    if (MINGW)
+        set(CMAKE_SYSTEM_NAME Windows)
+
+        # These defines were made in Windows 8
+        target_compile_definitions(${target} INTERFACE -DWINVER=0x0602)
+        target_compile_definitions(${target} INTERFACE -D_WIN32_WINNT=0x0602)
+    endif()
+
 endfunction()
