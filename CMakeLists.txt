@@ -60,10 +60,19 @@ add_library(LightSky::Setup ALIAS lssetup)
 
 
 # -------------------------------------
+# Precompiled Headers
+# -------------------------------------
+if (${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.16.0")
+    option(LIGHTSKY_ENABLE_PCH "Enable the use of precompiled headers in LightSky" OFF)
+endif()
+
+
+
+# -------------------------------------
 # Library Tests
 # -------------------------------------
-option(LS_BUILD_SETUP_TESTS "Build tests for the LightSetup library." ON)
+option(LS_SETUP_BUILD_TESTS "Build tests for the LightSetup library." ON)
 
-if(LS_BUILD_SETUP_TESTS)
+if(LS_SETUP_BUILD_TESTS)
     add_subdirectory(tests)
 endif()
