@@ -219,4 +219,34 @@
 #endif
 
 
+
+namespace ls
+{
+namespace setup
+{
+
+template <unsigned bytesToPrefetch, unsigned rw, unsigned level>
+inline void sized_prefetch(const void* pData) noexcept
+{
+    constexpr unsigned fetchCount = ((bytesToPrefetch > 512 ? 512 : bytesToPrefetch) + 63) / 64;
+    const char* p = reinterpret_cast<const char*>(pData);
+
+    switch (fetchCount/64)
+    {
+        case 8:  LS_PREFETCH(p+448, rw, level);
+        case 7:  LS_PREFETCH(p+384, rw, level);
+        case 6:  LS_PREFETCH(p+320, rw, level);
+        case 5:  LS_PREFETCH(p+256, rw, level);
+        case 4:  LS_PREFETCH(p+192, rw, level);
+        case 3:  LS_PREFETCH(p+128, rw, level);
+        case 2:  LS_PREFETCH(p+64,  rw, level);
+        default: LS_PREFETCH(p+0,   rw, level);
+    }
+}
+
+} // end setup namespace
+} // end ls namespace
+
+
+
 #endif /* LS_SETUP_MACROS_H */
