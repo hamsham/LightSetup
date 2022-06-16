@@ -5,6 +5,10 @@
 project(LightSetup CXX)
 set(OUTPUT_NAME lssetup)
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 include(ls_setup.cmake)
 
 
