@@ -90,6 +90,10 @@
         #define LS_X86_BMI
     #endif
 
+    #if defined(__BMI2__)
+        #define LS_X86_BMI2
+    #endif
+
     #if defined(__LZCNT__) || defined(LS_X86_SSE4_2)
         #define LS_X86_LZCNT
     #endif
