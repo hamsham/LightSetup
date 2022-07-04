@@ -111,6 +111,7 @@ function(_ls_configure_gnu_target target)
                 -mf16c
                 -mlzcnt
                 -mbmi  # TZCNT
+                -mbmi2
             )
 
         if(NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -208,6 +209,7 @@ function(_ls_configure_icc_target target)
             -mf16c
             -mlzcnt
             -mbmi
+            -mbmi2
             -mtune=core2
             -march=core2
             -ip
