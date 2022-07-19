@@ -70,7 +70,10 @@
         #define LS_X86_SSE3
     #endif
 
-    #if defined(__SSE2__) || defined(LS_X86_SSE3)
+    // MSVC doesn't define the usual SSE macros, nor does it offer any
+    // intermediate checks between SSE2 and AVX. So we settle for SSE2 until
+    // other instruction sets become available with AVX.... Thanks Microsoft!
+    #if defined(__SSE2__) || defined(LS_X86_SSE3) || defined(_M_AMD64) || defined(_M_X64)
         #define LS_X86_SSE2
     #endif
 
