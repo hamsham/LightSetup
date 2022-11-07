@@ -38,16 +38,31 @@
 
 
 /*
- * Calling Conventions
+ * C Calling Conventions
  */
 #if defined(LS_ARCH_X86)
     #if defined(LS_OS_WINDOWS)
-        #define LS_C_CALL __stdcall
+        #define LS_CCALL __cdecl
     #elif defined LS_COMPILER_GNU
-        #define LS_C_CALL __attribute__ ((stdcall))
+        #define LS_CCALL __attribute__ ((__cdecl__))
     #endif
 #else
-    #define LS_C_CALL
+    #define LS_CCALL
+#endif
+
+
+
+/*
+ * stdcall Calling Conventions
+ */
+#if defined(LS_ARCH_X86)
+    #if defined(LS_OS_WINDOWS)
+        #define LS_STDCALL __stdcall
+    #elif defined LS_COMPILER_GNU
+        #define LS_STDCALL __attribute__ ((stdcall))
+    #endif
+#else
+    #define LS_STDCALL
 #endif
 
 
