@@ -50,7 +50,7 @@ endif()
 # -------------------------------------
 # GCC & Clang Options
 # -------------------------------------
-function(_ls_configure_gnu_target target)
+function(_ls_configure_gnu_target target language)
     target_compile_options(${target}
         PRIVATE
             -Wall
@@ -59,12 +59,16 @@ function(_ls_configure_gnu_target target)
             -pedantic
             -pedantic-errors
             -Wno-implicit-fallthrough
-            -Wno-pessimizing-move
             -ftree-vectorize
             -ffast-math
             -funsafe-math-optimizations
             -fno-stack-protector
     )
+
+    string(TOUPPER ${language} targetLang)
+    if (${targetLang} STREQUAL CXX)
+        target_compile_options(${target} PRIVATE -Wno-pessimizing-move)
+    endif()
 
     if (ENABLE_PROFILING)
         target_compile_options(${target} PRIVATE -pg)
@@ -130,7 +134,7 @@ endfunction()
 # -------------------------------------
 # MSVC Options
 # -------------------------------------
-function(_ls_configure_msvc_target target)
+function(_ls_configure_msvc_target target language)
     if (ENABLE_X86_OPTIMIZATIONS)
         target_compile_options(${target} INTERFACE /arch:AVX2) # enable AVX2
     endif()
@@ -191,7 +195,7 @@ endfunction()
 # -------------------------------------
 # Intel ICC Options
 # -------------------------------------
-function(_ls_configure_icc_target target)
+function(_ls_configure_icc_target target language)
     target_compile_options(${target}
         INTERFACE
             -xAVX2
@@ -236,7 +240,7 @@ if (CMAKE_BUILD_TYPE)
     endif()
 endif()
 
-function(ls_configure_target target)
+function(ls_configure_target target language)
     # Debug Symbols
     if (LS_ENABLE_DEBUG_BUILD_FLAGS)
         target_compile_definitions(${target} INTERFACE -DLS_DEBUG)
@@ -248,11 +252,11 @@ function(ls_configure_target target)
     endif()
 
     if(CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-        _ls_configure_gnu_target(${target})
+        _ls_configure_gnu_target(${target} ${language})
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-        _ls_configure_msvc_target(${target})
+        _ls_configure_msvc_target(${target} ${language})
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "Intel")
-        _ls_configure_icc_target(${target})
+        _ls_configure_icc_target(${target} ${language})
     endif()
 
     # MinGW doesn't always play nice with the Windows SDK
@@ -264,4 +268,14 @@ function(ls_configure_target target)
         target_compile_definitions(${target} INTERFACE -D_WIN32_WINNT=0x0602)
     endif()
 
+endfunction()
+
+
+
+function(ls_configure_c_target target)
+    ls_configure_target(${target} C)
+endfunction()
+
+function(ls_configure_cxx_target target)
+    ls_configure_target(${target} CXX)
 endfunction()

@@ -37,7 +37,7 @@ set(LS_SETUP_HEADERS
 # -------------------------------------
 add_library(${OUTPUT_NAME} ${LS_LIB_TYPE} ${LS_SETUP_SOURCES} ${LS_SETUP_HEADERS})
 target_include_directories(${OUTPUT_NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>)
-ls_configure_target(${OUTPUT_NAME})
+ls_configure_cxx_target(${OUTPUT_NAME})
 
 
 
