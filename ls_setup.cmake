@@ -263,9 +263,9 @@ function(ls_configure_target target language)
     if (MINGW)
         set(CMAKE_SYSTEM_NAME Windows)
 
-        # These defines were made in Windows 8
-        target_compile_definitions(${target} INTERFACE -DWINVER=0x0602)
-        target_compile_definitions(${target} INTERFACE -D_WIN32_WINNT=0x0602)
+        # These defines were made in Windows 10
+        target_compile_definitions(${target} INTERFACE -DWINVER=0x0A00)
+        target_compile_definitions(${target} INTERFACE -D_WIN32_WINNT=0x0A00)
     endif()
 
 endfunction()
