@@ -220,6 +220,59 @@ struct IsBaseOf
 
 
 /*-----------------------------------------------------------------------------
+ * Replacement for std::is_pointer
+-----------------------------------------------------------------------------*/
+/*-------------------------------------
+ * General Case
+-------------------------------------*/
+template <typename data_t>
+struct IsPointer : public setup::FalseType<data_t>
+{
+};
+
+
+
+/*-------------------------------------
+ * Regular Pointer
+-------------------------------------*/
+template <typename data_t>
+struct IsPointer<data_t*> : public setup::TrueType<data_t*>
+{
+};
+
+
+
+/*-------------------------------------
+ * Const Pointer
+-------------------------------------*/
+template <typename data_t>
+struct IsPointer<data_t* const> : public setup::TrueType<data_t* const>
+{
+};
+
+
+
+/*-------------------------------------
+ * Volatile Pointer
+-------------------------------------*/
+template <typename data_t>
+struct IsPointer<data_t* volatile> : public setup::TrueType<data_t* volatile>
+{
+};
+
+
+
+/*-------------------------------------
+ * Const Volatile Pointer
+-------------------------------------*/
+template <typename data_t>
+struct IsPointer<data_t* const volatile> : public setup::TrueType<data_t* const volatile>
+{
+};
+
+
+
+/*-----------------------------------------------------------------------------
  * Replacement for std::is_integral
 -----------------------------------------------------------------------------*/
 /*-------------------------------------
